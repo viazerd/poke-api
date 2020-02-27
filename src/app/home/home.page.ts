@@ -1,39 +1,50 @@
-import { Component,OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { PokeApiService } from '../services/poke-api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
-  
+export class HomePage implements OnInit {
+
   pokeIndex = 0;
   pokeList = [];
 
-  @ViewChild(IonInfiniteScroll,{static: false}) infinite:IonInfiniteScroll
+  @ViewChild(IonInfiniteScroll, {static: false}) infinite: IonInfiniteScroll;
 
-  constructor(private pokeService: PokeApiService) {}
+  constructor(private pokeService: PokeApiService, private route: Router) {}
   ngOnInit(): void {
-    this.fetchPoke();
+    this.catchPoke();
   }
 
-  fetchPoke(showPoke = false, event?){
-    if(showPoke){
-      this.pokeIndex +=25;
+  catchPoke(showPoke = false, event?) {
+    // console.log(showPoke);
+
+    if (showPoke) {
+      console.log(showPoke);
+      this.pokeIndex += 25;
+      console.log(this.pokeIndex)
     }
     this.pokeService.getPokemon(this.pokeIndex).subscribe(
-      res=>{
-        this.pokeList = [...this.pokeList, ...res]
+      res => {
+        this.pokeList = [...this.pokeList, ...res];
+        console.log((this.pokeList.length == 0));
         console.log(this.pokeList);
 
         if (event) {
           event.target.complete();
         }
-   
+
       }
-    )
+    );
+  }
+
+  routeToInfo(pokeIndex) {
+    const infoRoute = 'info/' + pokeIndex;
+    this.route.navigateByUrl(infoRoute);
   }
 
 }

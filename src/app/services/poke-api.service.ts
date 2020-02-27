@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from "rxjs/operators";
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,20 +11,20 @@ export class PokeApiService {
 
   constructor(private http: HttpClient) { }
 
-  getPokemon(pokeIndex){
-    pokeIndex = 0;
+  getPokemon(pokeIndex) {
+    // pokeIndex = 0;
     return this.http.get(`${this.baseUrl}/pokemon?offset=${pokeIndex}&limit=25`).pipe(
-      map(result =>{
+      map(result => {
         console.log(result);
         return result['results'];
-      }),map(pokemon =>{
-        return pokemon.map((poke,index)=>{
+      }), map(pokemon => {
+        return pokemon.map((poke, index) => {
           poke.image = this.getPokeImage(pokeIndex + index + 1);
-          poke.pokeindex = pokeIndex + index + 1
-          return poke; 
-        })
+          poke.pokeindex = pokeIndex + index + 1;
+          return poke;
+        });
       })
-    )
+    );
   }
   getPokeImage(index) {
     return `${this.imageUrl}${index}.png`;
@@ -33,7 +33,7 @@ export class PokeApiService {
   getPokeInfo(index) {
     return this.http.get(`${this.baseUrl}/pokemon/${index}`).pipe(
       map(poke => {
-        let sprites = Object.keys(poke['sprites']);
+        const sprites = Object.keys(poke['sprites']);
         poke['images'] = sprites
           .map(spriteKey => poke['sprites'][spriteKey])
           .filter(img => img);
