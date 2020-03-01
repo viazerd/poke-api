@@ -7,6 +7,8 @@
        Pokedex
     </ion-title>
   </ion-toolbar>
+  <ion-searchbar type="text" debounce="500"  placeholder='Search Pokemon' showCancelButton="focus"  (ionChange)="onSearchChange($event)"></ion-searchbar>
+
 </ion-header>
 
 
@@ -14,7 +16,6 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-searchbar placeholder='Search Pokemon'></ion-searchbar>
   <ion-list *ngIf="(pokeList.length === 0)">
     <ion-item *ngFor="let i of [1,2,3,4,5]">
       <ion-avatar slot="start" >

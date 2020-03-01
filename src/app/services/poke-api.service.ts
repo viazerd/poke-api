@@ -11,9 +11,9 @@ export class PokeApiService {
 
   constructor(private http: HttpClient) { }
 
-  getPokemon(pokeIndex) {
+  getPokemon(pokeIndex,limit) {
     // pokeIndex = 0;
-    return this.http.get(`${this.baseUrl}/pokemon?offset=${pokeIndex}&limit=25`).pipe(
+    return this.http.get(`${this.baseUrl}/pokemon?offset=${pokeIndex}&limit=${limit}`).pipe(
       map(result => {
         console.log(result);
         return result['results'];
@@ -41,5 +41,7 @@ export class PokeApiService {
       })
     );
   }
+
+  
 
 }
