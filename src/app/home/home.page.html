@@ -17,7 +17,7 @@
   <ion-searchbar placeholder='Search Pokemon'></ion-searchbar>
   <ion-list *ngIf="(pokeList.length === 0)">
     <ion-item *ngFor="let i of [1,2,3,4,5]">
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" >
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-avatar>
       <ion-label class="ion-text-capitalize">
@@ -34,8 +34,8 @@
   <ion-list>
     <ion-item *ngFor="let pokemon of pokeList;" (click)="routeToInfo(pokemon.pokeindex)">
       <!-- <ion-item *ngFor="let pokemon of pokeList;" [routerLink] =  "pokemon.pokeindex"> -->
-      <ion-avatar slot="start">
-        <img [src]="pokemon.image" style="background:F2f2F2;">
+      <ion-avatar slot="start" class="avatar-bg">
+        <img [src]="pokemon.image" class="shadow">
       </ion-avatar>
       <ion-label class="ion-text-capitalize">
         <h2>{{pokemon.name}}</h2>

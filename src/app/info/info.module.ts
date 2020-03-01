@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { InfoPageRoutingModule } from './info-routing.module';
 
 import { InfoPage } from './info.page';
+import { ReversePipe } from '../reverse.pipe'
+
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { InfoPage } from './info.page';
     IonicModule,
     InfoPageRoutingModule
   ],
-  declarations: [InfoPage]
+  declarations: [InfoPage, ReversePipe]
 })
 export class InfoPageModule {}
