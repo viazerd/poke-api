@@ -1,0 +1,8 @@
+{
+  "appId": "com.dex.com",
+  "appName": "pokedex",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

@@ -1,24 +1,71 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="primary" (click)="scrollTop()">
     <ion-thumbnail slot="start">
-      <img src="https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_Pokedex_tool-512.png">
+      <img (click)="scrollTop()"
+        src="https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-2/135/_Pokedex_tool-512.png">
     </ion-thumbnail>
     <ion-title>
-       Pokedex
+      Pokedex
     </ion-title>
   </ion-toolbar>
-  <ion-searchbar type="text" debounce="500"  placeholder='Search Pokemon' showCancelButton="focus"  (ionChange)="onSearchChange($event)"></ion-searchbar>
+  <ion-grid>
+    <ion-row class="row-bg">
+      <ion-col size="10">
+        <ion-searchbar type="text" debounce="500" placeholder='Search Pokemon' showCancelButton="focus"
+          (ionChange)="onSearchChange($event)">
+        
+        </ion-searchbar>
+
+      </ion-col>
+      
+      
+     
+    </ion-row>
+  </ion-grid>
+ 
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click)="getAllTypes(allPokeInfo)"> 
+      <ion-icon md="filter" ios="filter"></ion-icon>
+    </ion-fab-button>
+    </ion-fab>
+
+    
 
 </ion-header>
 
 
- 
+
 
 <ion-content [fullscreen]="true">
+  <ion-grid  *ngIf="shoCat" fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+
+            <ion-card-title>Filter By Type</ion-card-title>
+          </ion-card-header>
+          <div>
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col  *ngFor="let type of pokeTypes" size="3">
+                  <ion-chip>
+                    <ion-label (click)="filterPokeByType(type)" color='primary'>{{type}}</ion-label>
+                  </ion-chip>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+           
+          </div>
+        </ion-card>
+      </ion-col>
+     
+    </ion-row>
+  </ion-grid>
 
   <ion-list *ngIf="(pokeList.length === 0)">
     <ion-item *ngFor="let i of [1,2,3,4,5]">
-      <ion-avatar slot="start" >
+      <ion-avatar slot="start">
         <ion-skeleton-text animated></ion-skeleton-text>
       </ion-avatar>
       <ion-label class="ion-text-capitalize">
@@ -45,10 +92,11 @@
     </ion-item>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite) = "catchPoke(true,$event)">
-    <ion-infinite-scroll-content loadingSpinner = "bubbles" loadingText="Gotta Catch 'Em All"></ion-infinite-scroll-content>
+  <ion-infinite-scroll (ionInfinite)="catchPoke(true,$event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Gotta Catch 'Em All">
+    </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  
+
 </ion-content>
 
 <!-- <ion-header collapse="condense">

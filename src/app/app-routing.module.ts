@@ -8,6 +8,8 @@ const routes: Routes = [
     path: 'info/:index',
     loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
   },
+
+
 ];
 
 @NgModule({
